@@ -16,7 +16,7 @@ Listing success was defined internally (Good / Bad) using a combination of:
 - Estimated occupancy
 - Engagement (number of reviews)
 
-This approach aligns with the coursework requirement to construct a reproducible success metric grounded in business understanding rather than relying on a predefined label :contentReference[oaicite:1]{index=1}.
+This approach aligns with the coursework requirement to construct a reproducible success metric grounded in business understanding rather than relying on a predefined label.
 
 ---
 
@@ -93,8 +93,48 @@ Models were evaluated on a test set (80/20 split) using:
 
 ---
 
+## Results Summary
+
+Both models achieved comparable overall accuracy (~68%) on the held-out test set, with differences in class-level performance.
+
+### Logistic Regression
+- Accuracy: 68.2%
+- Balanced accuracy: 63.6%
+- F1 score (Good listings): 0.50
+- F1 score (Bad listings): 0.77
+
+The logistic regression model showed stronger performance in identifying **Bad** listings, reflecting higher precision and recall for the majority class.
+
+### Decision Tree
+- Accuracy: 67.9%
+- Balanced accuracy: 64.9%
+- F1 score (Good listings): 0.52
+- F1 score (Bad listings): 0.76
+
+The decision tree slightly improved recall for **Good** listings and offered interpretability through feature importance.
+
+### Feature Importance (Decision Tree)
+The most influential predictors included:
+- Amenities count
+- Multi-host indicator
+- Superhost status
+- Maximum and minimum nights
+- Price
+
 ## Key Insights
 
-- Logistic regression provided more stable and balanced predictive performance.
-- Decision trees offered greater interpretability, highlighting the influence of price, amenities, and neighbourhood-related variables.
-- Host behaviour, listing capacity, and availability play a significant role in determining listing success.
+- **Amenities are the strongest driver of listing quality.**  
+  Both models highlight amenities_count as a key predictor, and the decision tree ranks it as the most important feature. Listings offering more amenities are substantially more likely to be classified as “Good”.
+
+- **Host reputation matters.**  
+  Superhost status and host identity verification are strongly associated with higher-quality listings, indicating that trust and host commitment play a critical role in guest satisfaction.
+
+- **Pricing and stay-length policies influence performance.**  
+  Higher prices, very short minimum stays, and very long maximum stays are negatively associated with listing quality, highlighting the importance of balanced pricing and booking flexibility.
+
+- **Property and room characteristics affect outcomes.**  
+  Entire homes and private properties generally perform better than shared spaces, while listings that accommodate more guests show slightly higher chances of being classified as “Good”.
+
+- **Location effects are significant.**  
+  Certain neighbourhoods (e.g. Westminster, Camden, Southwark, City of London) consistently increase the likelihood of higher-quality listings, confirming the importance of geographic desirability.
+
